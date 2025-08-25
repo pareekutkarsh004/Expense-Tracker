@@ -1,15 +1,32 @@
-import { useState } from 'react'
-import './App.css'
-import LoginSignUp from './Components/LoginSignUp/LoginSignUp'
+// src/App.jsx
 
-function App() {
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { SignedIn, SignedOut } from '@clerk/clerk-react';
+import LoginSignUp from './Components/LoginSignUp';
+import Dashboard from './Components/Dashboard';
+import './App.css';
 
-
+export default function App() {
   return (
-      <div className="h-screen w-screen">
-      <LoginSignUp />
-      </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginSignUp />} />
+        <Route
+          path="/dashboard"
+          element={
+            <>
+              <SignedIn>
+                <Dashboard />
+              </SignedIn>
+              <SignedOut>
+                <LoginSignUp />
+              </SignedOut>
+            </>
+          }
+        />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
+      </Routes>
+    </Router>
+  );
 }
-
-export default App

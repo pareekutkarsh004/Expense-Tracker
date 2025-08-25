@@ -6,7 +6,7 @@ import { getExpenses,addExpense,updateExpense,deleteExpense } from '../controlle
 
 const router = express.Router();
 
-router.use(clerkMiddleware());
+// router.use(clerkMiddleware());
 
 router.route('/')
     .get(getExpenses)
