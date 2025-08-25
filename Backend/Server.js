@@ -5,7 +5,7 @@ import 'dotenv/config'; // Make sure this is at the top to load env vars
 import connectDB from './database/db.js';
 import expenseRoutes from './routes/expenseRoutes.js'; // Import the expense router
 import { clerkMiddleware, getAuth } from '@clerk/express'; // Add this import
-import ensureUserExists from './middlewares/userMiddleware.js';
+import groupExpenseRoutes from './routes/groupExpenseRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +22,7 @@ app.use(clerkMiddleware());
 
 // Use the expense router for all API requests
 app.use('/api/expenses', expenseRoutes);
+app.use('/api/groups', groupExpenseRoutes); 
 
 app.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT}`);
